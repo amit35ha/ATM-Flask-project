@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <main class="page auth-page">
+        <section class="auth-shell" aria-label="ATM login">
+            <aside class="brand-panel">
+                <div class="brand-mark">
+                    <span class="brand-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 10.5 12 5l8 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6.5 10.5V19M11.5 10.5V19M17.5 10.5V19M4.5 19.5h15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <span>Smart ATM</span>
+                </div>
+
+                <div class="brand-copy">
+                    <h1>ATM Login</h1>
+                    <p>Fast account access with a clean, secure banking experience.</p>
+                </div>
+
+                <div class="atm-art" aria-hidden="true">
+                    <div class="card-visual">
+                        <div class="chip"></div>
+                        <div class="card-lines">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="form-panel">
+                <div class="form-card">
+                    <p class="eyebrow">Welcome back</p>
+                    <h2>Sign in</h2>
+                    <p>Enter your ATM details to continue to your dashboard.</p>
+
+                    {% if error %}
+                    <p class="alert alert-error">{{ error }}</p>
+                    {% endif %}
+
+                    <form method="POST" action="/login">
+                        <div class="field">
+                            <label for="atm">ATM Last 4 Digits</label>
+                            <div class="input-wrap">
+                                <span class="input-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M4 7.5h16v9H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                                        <path d="M7 11h5M7 14h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </span>
+                                <input id="atm" type="text" name="atm" inputmode="numeric" maxlength="4" autocomplete="username" required>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="pin">PIN</label>
+                            <div class="input-wrap">
+                                <span class="input-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M7 10V8a5 5 0 0 1 10 0v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M6 10h12v10H6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <input id="pin" type="password" name="pin" inputmode="numeric" maxlength="4" autocomplete="current-password" required>
+                            </div>
+                        </div>
+
+                        <button class="primary-btn" type="submit">
+                            Login
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </form>
+
+                    <div class="hint-row" aria-label="Security badges">
+                        <span class="mini-badge">Encrypted session</span>
+                        <span class="mini-badge">PIN protected</span>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <main class="page dashboard-page">
+        <div class="dashboard-shell">
+            <header class="topbar">
+                <div class="topbar-brand">
+                    <span class="brand-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 10.5 12 5l8 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6.5 10.5V19M11.5 10.5V19M17.5 10.5V19M4.5 19.5h15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <span>Smart ATM</span>
+                </div>
+                <a class="logout-link" href="/logout">
+                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18" aria-hidden="true">
+                        <path d="M10 6H6v12h4M14 8l4 4-4 4M8 12h10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Exit
+                </a>
+            </header>
+
+            <section class="dashboard-hero">
+                <div class="dashboard-title">
+                    <p class="eyebrow">Account dashboard</p>
+                    <h1>Welcome, {{ user.name }}</h1>
+                    <p>Manage quick ATM transactions from one clean screen.</p>
+                </div>
+
+                <aside class="balance-card" aria-label="Current balance">
+                    <div>
+                        <p>Available balance</p>
+                        <div class="balance-amount">Rs. {{ user.balance }}</div>
+                    </div>
+                    {% if message %}
+                    <p class="alert {% if 'Successful' in message or 'Deposited' in message %}alert-success{% else %}alert-error{% endif %}">{{ message }}</p>
+                    {% endif %}
+                </aside>
+            </section>
+
+            <section class="quick-stats" aria-label="Account highlights">
+                <div class="stat">
+                    <span>Account Type</span>
+                    <strong>Savings</strong>
+                </div>
+                <div class="stat">
+                    <span>Transaction Mode</span>
+                    <strong>Instant</strong>
+                </div>
+                <div class="stat">
+                    <span>Status</span>
+                    <strong>Active</strong>
+                </div>
+            </section>
+
+            <form class="action-panel" method="POST">
+                <div class="field">
+                    <label for="amount">Amount</label>
+                    <div class="input-wrap">
+                        <span class="input-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M7 7h10M7 12h10M7 17h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M9 7c3.4 0 5 1.8 5 5s-1.6 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <input id="amount" type="number" name="amount" min="1" step="1" placeholder="Enter amount" required>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="secondary-btn deposit" name="action" value="deposit" type="submit">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M12 5v14M6 11l6-6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Deposit
+                    </button>
+                    <button class="secondary-btn withdraw" name="action" value="withdraw" type="submit">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Withdraw
+                    </button>
+                    
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
